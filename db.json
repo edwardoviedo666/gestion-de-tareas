@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Aprender Next.js 15",
+      "completed": false
+    },
+    {
+      "id": "2",
+      "title": "Implementar json-server",
+      "completed": true
+    }
+  ]
+}
