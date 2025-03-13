@@ -1,12 +1,12 @@
-import {TaskRepository} from "app/core/ports/taskRepository";
-import {Task} from "app/core/entities/task.model";
-
+import {Task, TaskStatus} from "../entities/task";
+import {TaskRepository} from "app/core/ports/task.repository";
 
 export class AddTask {
-    constructor(private taskRepo: TaskRepository) {}
+    constructor(private taskRepo: TaskRepository) {
+    }
 
-    async execute(title: string, description: string) {
-        const task = new Task(crypto.randomUUID(), title, description);
+    async execute(title: string, description: string, status: TaskStatus) {
+        const task = new Task(crypto.randomUUID(), title, description, status);
         await this.taskRepo.saveTask(task);
     }
 }

@@ -1,13 +1,19 @@
-import {TaskRepository} from "app/core/repositories/task.repository";
-import {TaskModel} from "app/core/model/task.model";
+import {TaskRepository} from "app/core/ports/task.repository";
+import {Task} from "app/core/entities/task";
 
-export class TaskHttpRepository extends TaskRepository {
-    async search(): Promise<TaskModel[]> {
+export class TaskHttpRepository implements TaskRepository {
+    async getTasks(): Promise<Task[]> {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`);
         return response.json();
     }
 
-    async save(task: TaskModel): Promise<void> {
+    async getTaskById(id: string): Promise<Task | null> {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${id}`);
+        if (!response.ok) return null;
+        return response.json();
+    }
+
+    async saveTask(task: Task): Promise<void> {
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -15,7 +21,7 @@ export class TaskHttpRepository extends TaskRepository {
         });
     }
 
-    async update(id: string, data: Partial<TaskModel>): Promise<void> {
+    async updateTask(id: string, data: Partial<Task>): Promise<void> {
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${id}`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
@@ -23,7 +29,7 @@ export class TaskHttpRepository extends TaskRepository {
         });
     }
 
-    async delete(id: string): Promise<void> {
+    async deleteTask(id: string): Promise<void> {
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${id}`, {method: "DELETE"});
     }
 }

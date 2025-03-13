@@ -1,9 +1,22 @@
 {
   "tasks": [
     {
-      "id": "df24c408-8a0f-4b22-a60b-00d61580ddc1",
-      "title": "asdad",
-      "completed": false
+      "id": "4c7d22e6-b3bc-43c5-9ec2-35b809dfdc2e",
+      "title": "Aprender",
+      "description": "Sin descripción",
+      "status": "todo"
+    },
+    {
+      "id": "668e9240-9300-47b6-ba7f-86364a0ed77e",
+      "title": "sdasd",
+      "description": "Sin descripción",
+      "status": "todo"
+    },
+    {
+      "id": "187ddde0-7636-40bb-ac6e-5916f50b3ad6",
+      "title": "asdsad",
+      "description": "Sin descripción",
+      "status": "todo"
     }
   ]
 }

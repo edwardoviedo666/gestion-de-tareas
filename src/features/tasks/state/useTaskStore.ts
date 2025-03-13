@@ -1,13 +1,15 @@
-import { create } from "zustand";
-import {TaskLocalRepository} from "app/infraestructure/repositories/TaskLocalRepository";
+import {create} from "zustand";
 import {ListTasks} from "app/core/uses-cases/ListTasks";
 import {AddTask} from "app/core/uses-cases/AddTask";
 import {ChangeTaskStatus} from "app/core/uses-cases/ChangeTaskStatus";
-import {Task} from "app/core/entities/task.model";
-const repo = new TaskLocalRepository();
-const listTasks = new ListTasks(repo);
-const addTask = new AddTask(repo);
-const changeTaskStatus = new ChangeTaskStatus(repo);
+import {taskRepository} from "app/infraestructure/providers/taskRepository.provider";
+import {Task, TaskStatus} from "app/core/entities/task";
+import {DeleteTask} from "app/core/uses-cases/DeleteTask";
+
+const listTasks = new ListTasks(taskRepository);
+const addTask = new AddTask(taskRepository);
+const changeTaskStatus = new ChangeTaskStatus(taskRepository);
+const deleteTaskUseCase = new DeleteTask(taskRepository); // ✅ Instanciamos el caso de uso
 
 interface TaskState {
     tasks: Task[];
@@ -18,18 +20,26 @@ interface TaskState {
 
 export const useTaskStore = create<TaskState>((set) => ({
     tasks: [],
+
     loadTasks: async () => {
         const tasks = await listTasks.execute();
-        set({ tasks });
+        set({tasks});
     },
-    createTask: async (title, description) => {
-        await addTask.execute(title, description);
+
+    createTask: async (title, description, status) => {
+        await addTask.execute(title, description, status); // ✅ Solo pasamos dos parámetros
         const tasks = await listTasks.execute();
-        set({ tasks });
+        set({tasks});
     },
+
     updateTaskStatus: async (id, status) => {
         await changeTaskStatus.execute(id, status);
         const tasks = await listTasks.execute();
-        set({ tasks });
+        set({tasks});
+    },
+
+    deleteTask: async (id) => {
+        await deleteTaskUseCase.execute(id);
+        await useTaskStore.getState().loadTasks(); // ✅ Recargar estado después de eliminar
     }
 }));
