@@ -1,5 +1,6 @@
-import {TaskModel} from "../domain/task.model";
+
 import {taskRepository} from "app/features/tasks/domain/task.provider";
+import {TaskModel} from "app/core/model/task.model";
 
 class TasksService {
     async getAllTasks(): Promise<TaskModel[]> {

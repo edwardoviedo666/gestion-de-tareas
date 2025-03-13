@@ -1,14 +1,9 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Aprender Next.js 15",
+      "id": "df24c408-8a0f-4b22-a60b-00d61580ddc1",
+      "title": "asdad",
       "completed": false
-    },
-    {
-      "id": "2",
-      "title": "Implementar json-server",
-      "completed": true
     }
   ]
 }
