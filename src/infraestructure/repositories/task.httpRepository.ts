@@ -3,7 +3,12 @@ import {Task} from "app/core/entities/task";
 
 export class TaskHttpRepository implements TaskRepository {
     async getTasks(): Promise<Task[]> {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks?_sort=createdAt&_order=asc`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, {
+            cache: "no-store"
+        });
+        if (!response.ok) {
+            throw new Error("Error al obtener tareas");
+        }
         return response.json();
     }
 

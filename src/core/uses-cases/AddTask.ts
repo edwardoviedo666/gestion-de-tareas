@@ -1,5 +1,5 @@
 import {Task, TaskStatus} from "../entities/task";
-import {TaskRepository} from "app/core/ports/task.repository";
+import {TaskRepository} from "../ports/task.repository";
 
 export class AddTask {
     constructor(private taskRepo: TaskRepository) {

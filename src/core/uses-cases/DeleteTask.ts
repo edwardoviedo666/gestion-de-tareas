@@ -1,4 +1,4 @@
-import {TaskRepository} from "app/core/ports/task.repository";
+import {TaskRepository} from "../ports/task.repository";
 
 export class DeleteTask {
     constructor(private taskRepo: TaskRepository) {

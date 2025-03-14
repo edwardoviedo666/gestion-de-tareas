@@ -1,20 +1,44 @@
 {
   "tasks": [
     {
-      "id": "df0f554e-a902-47fa-a65d-c17772190176",
-      "title": "Calcular la raíz cuadrada",
+      "id": "c72c5047-d087-4846-942f-60eb2415ead1",
+      "title": "Aprender Go Nivel intermedio",
+      "description": "Sin description",
+      "status": "todo"
+    },
+    {
+      "id": "a8e6d488-ca30-4591-ab94-e1b772015f67",
+      "title": "Construir biblioteca de componentes",
       "description": "Sin description",
       "status": "in-progress"
     },
     {
-      "id": "8e9229e1-7608-4c78-b779-677022ebcc05",
-      "title": "Estructura basica del proyecto",
+      "id": "d02a2314-cce4-4f97-a529-6f3e2698ec90",
+      "title": "Crear documentación",
       "description": "Sin description",
       "status": "done"
     },
     {
-      "id": "c72c5047-d087-4846-942f-60eb2415ead1",
-      "title": "Go Nivel intermedio",
+      "id": "1dc79caa-f41a-4b4a-9a0d-b9385ff2fd32",
+      "title": "Crear Landing Page",
+      "description": "Sin description",
+      "status": "in-progress"
+    },
+    {
+      "id": "d14192c7-98c7-4a44-859d-c1b018db8685",
+      "title": "Construir Componente Header",
+      "description": "Sin description",
+      "status": "todo"
+    },
+    {
+      "id": "be7f840e-e3ff-47fa-9344-7bc6b3e0c75a",
+      "title": "Construir biblioteca de Custom Hooks",
+      "description": "Sin description",
+      "status": "done"
+    },
+    {
+      "id": "e932ae64-37da-4791-8ef9-e5a36e994ee2",
+      "title": "Implementar Estrategia para la migracion del Proyecto Principal al secundario",
       "description": "Sin description",
       "status": "todo"
     }

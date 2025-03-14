@@ -1,5 +1,5 @@
-import {TaskRepository} from "app/core/ports/task.repository";
-import {Task} from "app/core/entities/task";
+import {Task} from "../entities/task";
+import {TaskRepository} from "../ports/task.repository";
 
 export class ListTasks {
     constructor(private taskRepo: TaskRepository) {

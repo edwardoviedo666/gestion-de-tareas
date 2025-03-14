@@ -1,6 +1,6 @@
 import Image from "next/image";
 import cn from 'classnames';
-import styles from "./header.module.scss"; // Importa los estilos de Sass
+import styles from "./header.module.scss";
 const Header = () => {
     return (
         <header className={cn(styles['header'], 'header')}>
