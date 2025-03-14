@@ -13,14 +13,27 @@ const deleteTaskUseCase = new DeleteTask(taskRepository); // ✅ Instanciamos el
 
 interface TaskState {
     tasks: Task[];
+    moveTask: (taskId: string, newStatus: "todo" | "in-progress" | "done") => void;
+    setTasks: (tasks: Task[]) => void;
     loadTasks: () => Promise<void>;
-    createTask: (title: string, description: string) => Promise<void>;
+    createTask: (title: string, description: string, status: TaskStatus) => Promise<void>;
     updateTaskStatus: (id: string, status: "todo" | "in-progress" | "done") => Promise<void>;
+    deleteTask: (id: string) => Promise<void>;
 }
 
 export const useTaskStore = create<TaskState>((set) => ({
     tasks: [],
+    setTasks: (tasks) => set({tasks}),
 
+    moveTask: async (taskId, newStatus) => {
+        set((state) => ({
+            tasks: state.tasks.map((task) =>
+                task.id === taskId ? {...task, status: newStatus} : task
+            ),
+        }));
+
+        await taskRepository.updateTask(taskId, {status: newStatus});
+    },
     loadTasks: async () => {
         const tasks = await listTasks.execute();
         set({tasks});

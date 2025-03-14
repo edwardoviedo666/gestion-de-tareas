@@ -1,22 +1,22 @@
 {
   "tasks": [
     {
-      "id": "4c7d22e6-b3bc-43c5-9ec2-35b809dfdc2e",
-      "title": "Aprender",
-      "description": "Sin descripción",
+      "id": "6a462149-9e43-43f8-ab14-9b3dd6664473",
+      "title": "Aprender Node Js",
+      "description": "Sin description",
       "status": "todo"
     },
     {
-      "id": "668e9240-9300-47b6-ba7f-86364a0ed77e",
-      "title": "sdasd",
-      "description": "Sin descripción",
-      "status": "todo"
+      "id": "df0f554e-a902-47fa-a65d-c17772190176",
+      "title": "Calcular la raíz cuadrada",
+      "description": "Sin description",
+      "status": "in-progress"
     },
     {
-      "id": "187ddde0-7636-40bb-ac6e-5916f50b3ad6",
-      "title": "asdsad",
-      "description": "Sin descripción",
-      "status": "todo"
+      "id": "8e9229e1-7608-4c78-b779-677022ebcc05",
+      "title": "Estructura basica del proyecto",
+      "description": "Sin description",
+      "status": "done"
     }
   ]
 }

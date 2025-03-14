@@ -4,7 +4,7 @@ import {useTaskStore} from "../state/useTaskStore";
 import {TaskStatus} from "app/core/entities/task"; // ✅ Conectamos Zustand
 
 export default function TaskList() {
-    const {tasks, loadTasks, createTask, updateTaskStatus, deleteTask} = useTaskStore();
+
     const [newTaskTitle, setNewTaskTitle] = useState("");
     const [newTaskDescription, setNewTaskDescription] = useState("");
 

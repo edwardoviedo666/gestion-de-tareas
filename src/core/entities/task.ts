@@ -5,6 +5,8 @@ export class Task {
         public readonly id: string,
         public readonly title: string,
         public readonly description: string,
-        public readonly status: TaskStatus = "todo"
-    ) {}
+        public readonly status: TaskStatus = "todo",
+        public readonly position: number
+    ) {
+    }
 }
