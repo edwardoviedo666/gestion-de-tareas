@@ -1,21 +1,29 @@
-import styles from "./_list-tasks.module.scss";
+import React, {DragEvent} from 'react'
 import {useTaskStore} from "app/features/tasks/state/useTaskStore";
-import {useEffect, useState} from "react";
+import {ReactNode, useState} from "react";
+import {TaskStatus} from "app/core/entities/task";
+import styles from "./list-tasks.module.scss";
 
-function List({title, children, handleDrop, id}) {
+interface ListProps {
+    title: string;
+    id: TaskStatus;
+    children: ReactNode;
+    handleDrop: (event: React.DragEvent<HTMLDivElement>) => void;
+}
+
+export default function List({title, children, handleDrop, id}: ListProps) {
     const {createTask} = useTaskStore();
     const [newTaskTitle, setNewTaskTitle] = useState("");
-    const [addingTaskFor, setAddingTaskFor] = useState<string | null>(null)
     const [isAddingTask, setIsAddingTask] = useState(false);
 
-    function handleDragOver(event) {
+    function handleDragOver(event: DragEvent<HTMLDivElement>) {
         event.preventDefault();
     }
 
 
     function handleAddTask() {
         if (!newTaskTitle.trim()) return;
-        createTask(newTaskTitle, "Sin description", id); // 🔥 Guardar la tarea en Zustand y el backend
+        createTask(newTaskTitle, "Sin description", id);
         setNewTaskTitle("");
         setIsAddingTask(false);
     }
@@ -31,7 +39,9 @@ function List({title, children, handleDrop, id}) {
                 <div>
                     <h2 className={styles.title}>{title}</h2>
                 </div>
+
                 <div className={styles['content-body']}>{children}</div>
+
                 {isAddingTask ? (
                     <input
                         autoFocus
@@ -51,5 +61,3 @@ function List({title, children, handleDrop, id}) {
         </div>
     );
 }
-
-export default List;

@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  flex-direction: column;
+  flex: 1;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  gap: 1.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  cursor: grab;
+}
+
+.main:active {
+  cursor: grabbing;
+}
+
+.main > * {
+  flex: 0 0 auto;
+  width: 300px;
+}
