@@ -1,20 +1,18 @@
 import Image from "next/image";
 import styles from "./card.module.scss";
-import {Task} from "app/core/entities/task";
-import {useTaskStore} from "app/features/tasks/state/useTaskStore";
+import {Task, TaskStatus} from "app/core/entities/task";
 
 interface CardProps {
     key
     task: Task;
+    onDelete: (id: string) => void;
     setDragged: (dragged: {
-        data: { id: string; title: string; status: "todo" | "in-progress" | "done" };
+        data: { id: string; title: string; status: TaskStatus };
         list: string
     }) => void;
 }
 
-function Card({task, setDragged}: CardProps) {
-    const {deleteTask} = useTaskStore();
-
+function Card({task, setDragged, onDelete}: CardProps) {
     function handleDragStart(event: React.DragEvent<HTMLDivElement>) {
         if (!event.dataTransfer) {
             console.error("event.dataTransfer no está disponible en dragStart");
@@ -31,9 +29,6 @@ function Card({task, setDragged}: CardProps) {
         event.dataTransfer.setData("taskId", task.id);
     }
 
-    const handleDeleteTask = () => {
-        deleteTask(task.id)
-    }
     return (
         <div
             draggable
@@ -44,7 +39,7 @@ function Card({task, setDragged}: CardProps) {
             <div className={styles['task-header']}>
                 <p>{task.title}</p>
                 <span>
-                     <Image src="/delete.png" width={20} height={20} alt="edit Task" onClick={handleDeleteTask}/>
+                     <Image src="/delete.png" width={20} height={20} alt="edit Task" onClick={_ => onDelete(task.id)}/>
                 </span>
             </div>
             <div className={styles['task-footer']}>

@@ -1,12 +1,6 @@
 {
   "tasks": [
     {
-      "id": "6a462149-9e43-43f8-ab14-9b3dd6664473",
-      "title": "Aprender Node Js",
-      "description": "Sin description",
-      "status": "todo"
-    },
-    {
       "id": "df0f554e-a902-47fa-a65d-c17772190176",
       "title": "Calcular la raíz cuadrada",
       "description": "Sin description",
@@ -17,6 +11,12 @@
       "title": "Estructura basica del proyecto",
       "description": "Sin description",
       "status": "done"
+    },
+    {
+      "id": "c72c5047-d087-4846-942f-60eb2415ead1",
+      "title": "Go Nivel intermedio",
+      "description": "Sin description",
+      "status": "todo"
     }
   ]
 }
