@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./card.module.scss";
 import {Task, TaskStatus} from "app/core/entities/task";
+import {useResponsive} from "app/infraestructure/hooks/useResponsive";
 
 interface CardProps {
     key: string
@@ -11,6 +12,8 @@ interface CardProps {
 }
 
 function Card({task, setDragged, onDelete, onChangeStatus}: CardProps) {
+    const showSelect: boolean = useResponsive()
+
     function handleDragStart(event: React.DragEvent<HTMLDivElement>) {
         if (!event.dataTransfer) {
             console.error("event.dataTransfer no está disponible en dragStart");
@@ -50,11 +53,12 @@ function Card({task, setDragged, onDelete, onChangeStatus}: CardProps) {
                 <span className={styles.comments}>
                     <Image src="/comments.svg" width={20} height={20} alt="comments"/>
                     {task.description.length > 0 ? task.description.length : null}
-                    <select value={task.status} onChange={handleStatusChange}>
-                         <option value="todo">To Do</option>
-                         <option value="in-progress">In Progress</option>
-                         <option value="done">Done</option>
-                    </select>
+                    {showSelect &&
+                        <select className={styles['status-select']} value={task.status} onChange={handleStatusChange}>
+                            <option value="todo">To Do</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>}
                 </span>
                 <span>
                     <Image src="/avatar.png" width={20} height={20} alt="Avatar"/>
