@@ -1,25 +1,21 @@
 import {TaskRepository} from "app/core/ports/task.repository";
 import {Task} from "app/core/entities/task";
+import {httpRequest} from "app/core/utils/handleApiRequest";
+
 
 export class TaskHttpRepository implements TaskRepository {
+    private readonly baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
     async getTasks(): Promise<Task[]> {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, {
-            cache: "no-store"
-        });
-        if (!response.ok) {
-            throw new Error("Error al obtener tareas");
-        }
-        return response.json();
+        return httpRequest<Task[]>(`${this.baseUrl}/tasks`, {cache: "no-store"});
     }
 
     async getTaskById(id: string): Promise<Task | null> {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${id}`);
-        if (!response.ok) return null;
-        return response.json();
+        return httpRequest<Task | null>(`${this.baseUrl}/tasks/${id}`);
     }
 
     async saveTask(task: Task): Promise<void> {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, {
+        await httpRequest<void>(`${this.baseUrl}/tasks`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(task),
@@ -27,7 +23,7 @@ export class TaskHttpRepository implements TaskRepository {
     }
 
     async updateTask(id: string, data: Partial<Task>): Promise<void> {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${id}`, {
+        await httpRequest<void>(`${this.baseUrl}/tasks/${id}`, {
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data),
@@ -35,6 +31,6 @@ export class TaskHttpRepository implements TaskRepository {
     }
 
     async deleteTask(id: string): Promise<void> {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks/${id}`, {method: "DELETE"});
+        await httpRequest<void>(`${this.baseUrl}/tasks/${id}`, {method: "DELETE"});
     }
 }

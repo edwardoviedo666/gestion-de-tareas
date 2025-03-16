@@ -14,8 +14,9 @@ const deleteTaskUseCase = new DeleteTask(taskRepository);
 interface TaskState {
     isLoading: boolean;
     tasks: Task[];
-    moveTask: (taskId: string, newStatus: TaskStatus) => void;
+    error: string | null;
     setTasks: (tasks: Task[]) => void;
+    setError: (error: string | null) => void;
     loadTasks: () => Promise<void>;
     createTask: (title: string, description: string, status: TaskStatus) => Promise<void>;
     updateTaskStatus: (id: string, status: TaskStatus) => Promise<void>;
@@ -25,37 +26,46 @@ interface TaskState {
 export const useTaskStore = create<TaskState>((set) => ({
     tasks: [],
     isLoading: true,
-    setTasks: (tasks) => set({tasks, isLoading: false}),
+    error: null,
+    setTasks: (tasks) => set({ tasks, isLoading: false, error: null }),
+    setError: (error) => set({ error, isLoading: false }),
 
-    moveTask: async (taskId, newStatus) => {
-        set((state) => ({
-            tasks: state.tasks.map((task) =>
-                task.id === taskId ? {...task, status: newStatus} : task
-            ),
-        }));
-
-        await taskRepository.updateTask(taskId, {status: newStatus});
-    },
     loadTasks: async () => {
-        set({isLoading: true});
-        const tasks = await listTasks.execute();
-        set({tasks, isLoading: false});
+        set({ isLoading: true, error: null });
+        try {
+            const tasks = await listTasks.execute();
+            set({ tasks, isLoading: false });
+        } catch (error) {
+            set({ error: "No se pudieron cargar las tareas", isLoading: false });
+        }
     },
 
     createTask: async (title, description, status) => {
-        await addTask.execute(title, description, status);
-        const tasks = await listTasks.execute();
-        set({tasks});
+        try {
+            await addTask.execute(title, description, status);
+            const tasks = await listTasks.execute();
+            set({ tasks, error: null });
+        } catch (error) {
+            set({ error: "Error al crear la tarea" });
+        }
     },
 
     updateTaskStatus: async (id, status) => {
-        await changeTaskStatus.execute(id, status);
-        const tasks = await listTasks.execute();
-        set({tasks});
+        try {
+            await changeTaskStatus.execute(id, status);
+            const tasks = await listTasks.execute();
+            set({ tasks, error: null });
+        } catch (error) {
+            set({ error: "Error al actualizar el estado de la tarea" });
+        }
     },
 
     deleteTask: async (id) => {
-        await deleteTaskUseCase.execute(id);
-        await useTaskStore.getState().loadTasks();
+        try {
+            await deleteTaskUseCase.execute(id);
+            await useTaskStore.getState().loadTasks();
+        } catch (error) {
+            set({ error: "Error al eliminar la tarea" });
+        }
     }
 }));
