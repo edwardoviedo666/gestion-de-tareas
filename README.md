@@ -19,7 +19,7 @@ src/
 │
 │── features/                # Funcionalidades modulares de la aplicación
 │
-│── infraestructure/         # Implementaciones de infraestructura (API, persistencia)
+│── infraestructure/         # Implementaciones de infraestructura (API, persistencia) y factories
 │
 │── shared/                  # Componentes compartidos y estilos globales
 ```
