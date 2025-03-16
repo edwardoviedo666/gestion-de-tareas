@@ -97,15 +97,14 @@
   background-color: white;
   cursor: pointer;
   font-size: 14px;
-  display: none; /* 🔥 Oculto por defecto */
+  display: none;
 }
 
 .status-select:focus {
   outline: none;
-  border-color: #3b82f6; /* 🔥 Azul cuando está enfocado */
+  border-color: #3b82f6;
 }
 
-/* 🔥 Mostrar solo en resoluciones menores a 1024px */
 @media (max-width: 1024px) {
   .status-select {
     display: flex;

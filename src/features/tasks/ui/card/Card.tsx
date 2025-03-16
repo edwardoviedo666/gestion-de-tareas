@@ -45,7 +45,8 @@ function Card({task, setDragged, onDelete, onChangeStatus}: CardProps) {
             <div className={styles['task-header']}>
                 <p>{task.title}</p>
                 <span>
-                     <Image src="/delete.png" width={20} height={20} alt="edit Task" onClick={_ => onDelete(task.id)}/>
+                     <Image src="/delete.png" width={20} height={20} alt="delete task"
+                            onClick={_ => onDelete(task.id)}/>
                 </span>
             </div>
 
