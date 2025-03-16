@@ -1,8 +1,7 @@
-import {TaskHttpRepository} from "../repositories/task.httpRepository";
 import {providerFactory} from "./providerFactory";
 import {TaskRepository} from "app/core/ports/task.repository";
 import {EnvironmentEnum} from "app/infraestructure/providers/environment.enum";
-import {TaskLocalRepository} from "app/infraestructure/repositories/task.localRepository";
+import {TaskHttpRepository, TaskLocalRepository} from "app/infraestructure/repositories";
 
 export const taskRepository: TaskRepository = providerFactory(
     {

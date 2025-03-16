@@ -7,12 +7,6 @@
       "status": "in-progress"
     },
     {
-      "id": "a8e6d488-ca30-4591-ab94-e1b772015f67",
-      "title": "Construir biblioteca de componentes",
-      "description": "Sin description",
-      "status": "in-progress"
-    },
-    {
       "id": "d02a2314-cce4-4f97-a529-6f3e2698ec90",
       "title": "Crear documentación",
       "description": "Sin description",
@@ -39,6 +33,12 @@
     {
       "id": "e932ae64-37da-4791-8ef9-e5a36e994ee2",
       "title": "Implementar Estrategia para la migracion del Proyecto Principal al secundario",
+      "description": "Sin description",
+      "status": "todo"
+    },
+    {
+      "id": "25c69a19-3d16-45e3-9de9-9948bbadde3f",
+      "title": "Tes2",
       "description": "Sin description",
       "status": "todo"
     }

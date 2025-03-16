@@ -20,6 +20,7 @@ export default function TaskListSection({
 
                                         }: TaskListSectionProps) {
     const {tasks, moveTask, deleteTask, isLoading} = useTaskStore();
+
     return (
         <List title={title} id={status} handleDrop={handleDrop}>
             {isLoading ? (

@@ -1,8 +1,9 @@
-import { Task } from "../entities/task";
-import { TaskRepository } from "../ports/task.repository";
+import {Task} from "../entities/task";
+import {TaskRepository} from "../ports/task.repository";
 
 export class ListTasks {
-    constructor(private taskRepo: TaskRepository) {}
+    constructor(private taskRepo: TaskRepository) {
+    }
 
     async execute(): Promise<Task[]> {
         try {
