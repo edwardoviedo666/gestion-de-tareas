@@ -1,5 +1,5 @@
-import TaskList from "app/features/tasks/ui/TaskList";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-    return <TaskList/>;
+    redirect("/board");
 }

@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📝 Task Manager - Gestión de Tareas
 
-## Getting Started
+Este proyecto es una aplicación de gestión de tareas desarrollada con **Next.js** y organizada bajo un enfoque **modular y escalable**. Implementa patrones de diseño como **Clean Architecture** y utiliza tecnologías modernas como **Zustand** para la gestión del estado.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📁 **Estructura del Proyecto**
+```
+src/
+│── app/                     # Punto de entrada principal
+│   ├── protected/           # Rutas protegidas
+│   │   ├── board/           # Vista principal del tablero de tareas
+│   │   │   ├── page.tsx     # Interfaz general de la vista 'Board'
+│   │   ├── layout.tsx       # Layout de la aplicación
+│
+│── core/                    # Lógica de dominio
+│   ├── entities/            # Entidades del negocio (Task, TaskStatus)
+│   ├── ports/               # Definición de interfaces para abstracción de infraestructura
+│   ├── uses-cases/          # Casos de uso (AddTask, DeleteTask, ChangeTaskStatus, etc.)
+│   ├── utils/               # Funciones utilitarias como httpRequest para gestión de peticiones
+│
+│── features/                # Funcionalidades modulares de la aplicación
+│
+│── infraestructure/         # Implementaciones de infraestructura (API, persistencia) y factories
+│
+│── shared/                  # Componentes compartidos y estilos globales
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 **Cómo Ejecutar el Proyecto**
+### 1️⃣ **Instalar dependencias**
+Antes de iniciar la aplicación, asegúrate de instalar todas las dependencias necesarias:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+npm install
+```
 
-## Learn More
+### 2️⃣ **Iniciar el Servidor**
+Ejecuta el siguiente comando para iniciar tanto la API fake (`json-server`) como la aplicación Next.js en modo desarrollo:
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+npm run dev
+```
+> 🔹 Esto iniciará el servidor JSON en el puerto `5000` y Next.js con **Turbopack** para un desarrollo más rápido.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3️⃣ **Ejecutar Pruebas**
+Para ejecutar las pruebas unitarias, usa:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```sh
+npm run test
+```
 
-## Deploy on Vercel
+Si estás en un entorno de CI/CD, usa:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```sh
+npm run test:ci
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🏗️ **Decisiones de Diseño**
+### ✅ **Uso de Clean Architecture**
+El proyecto sigue una **arquitectura limpia** para mantener la separación entre capas:
+- `core/` contiene la **lógica de negocio** y no depende de infraestructura.
+- `infraestructure/` maneja la **persistencia y comunicación con API**.
+- `app/` contiene la **interfaz de usuario y lógica de presentación**.
+
+### ✅ **Zustand para el Estado Global**
+En lugar de `Redux`, se usa **Zustand**, lo que permite un estado global más sencillo y eficiente.
+
+### ✅ **Interceptor de Errores en HTTP**
+Se implementó una función `httpRequest` para manejar errores de red y servidor de manera centralizada. Esto previene fallos inesperados en la UI.
+
+### ✅ **Pruebas Unitarias**
+Cada módulo incluye archivos de prueba colocados junto a su implementación para facilitar el testing.
+
+---
+
+## 📌 **Casos de Uso Implementados**
+| Caso de Uso        | Descripción |
+|--------------------|------------|
+| `AddTask`         | Agrega una nueva tarea. |
+| `ChangeTaskStatus`| Cambia el estado de una tarea. |
+| `DeleteTask`      | Elimina una tarea existente. |
+| `ListTasks`       | Obtiene la lista de tareas. |
+
+---
+
+## ⚡ **Problemas Abordados**
+✅ **Evitar errores inesperados en el frontend.**  
+✅ **Gestión centralizada de errores con un interceptor de peticiones HTTP.**  
+✅ **Uso de Tipado Estricto con TypeScript para mayor seguridad.**  
+✅ **Estructura modular y escalable para futuros cambios.**  
+✅ **Manejo de entornos y configuración dinámica de repositorios.**
+
+El proyecto utiliza un **sistema de proveedores** para determinar el repositorio a utilizar en función del entorno en el que se ejecuta la aplicación (`Local`, `Development` o `Production`).
+
+- **Archivo `.env`**
+    - `NEXT_PUBLIC_ENV`: Define el entorno (`local`, `development`, `production`).
+    - `NEXT_PUBLIC_API_URL`: URL de la API, configurada por defecto para JSON Server (`http://localhost:5000`).
+    - Es importante **no eliminar este archivo** para que el proyecto funcione correctamente.
+
+- **Gestión de repositorios**
+    - Se usa `providerFactory` para decidir si se utiliza `TaskLocalRepository` (datos en memoria) o `TaskHttpRepository` (datos obtenidos desde la API).
+    - Si el entorno es `local`, se usa `TaskLocalRepository`, permitiendo pruebas sin conexión.
+    - Para `development` y `production`, se usa `TaskHttpRepository`, que interactúa con la API real.
+
+- **Base de datos local (`db.json`)**
+    - Al agregar o eliminar una tarea, los cambios pueden verse reflejados en `db.json`.
+    - Este archivo es esencial para el correcto funcionamiento con `json-server` y **no debe ser eliminado**.
+
+---
+
+## 🛠 **Tecnologías Utilizadas**
+- **Next.js** - Framework de React para SSR y SSG.
+- **Zustand** - Gestión de estado eficiente y minimalista.
+- **TypeScript** - Tipado estático para mayor seguridad.
+- **JSON Server** - API fake para desarrollo rápido.
+- **Jest** - Framework de testing.
+
+---
+
+## 👨‍💻 **Contribución**
+Si deseas contribuir:
+1. Haz un **fork** del repositorio.
+2. Crea una nueva rama (`feature/nueva-funcionalidad`).
+3. Haz un **commit** de tus cambios (`git commit -m 'Agrega nueva funcionalidad'`).
+4. Envía un **pull request**.
+
+---
+
+## 📄 **Licencia**
+Este proyecto está bajo la licencia MIT. Puedes usarlo libremente para tus propios proyectos.
+
+---
+
+### 🚀 **¡Listo para usar y escalar!**
+Si tienes alguna duda o sugerencia, no dudes en abrir un **issue** o contribuir al proyecto. 🔥
+

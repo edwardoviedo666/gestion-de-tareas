@@ -1,4 +1,3 @@
-
 export enum EnvironmentEnum {
     Local = "local",
     Development = "development",
