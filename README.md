@@ -97,7 +97,7 @@ El proyecto utiliza un **sistema de proveedores** para determinar el repositorio
 - **Archivo `.env`**
     - `NEXT_PUBLIC_ENV`: Define el entorno (`local`, `development`, `production`).
     - `NEXT_PUBLIC_API_URL`: URL de la API, configurada por defecto para JSON Server (`http://localhost:5000`).
-    - Es importante **no eliminar este archivo** para que el proyecto funcione correctamente.
+    - Es importante **Crear este archivo en la raiz del proyecto** para que el proyecto funcione correctamente.
 
 - **Gestión de repositorios**
     - Se usa `providerFactory` para decidir si se utiliza `TaskLocalRepository` (datos en memoria) o `TaskHttpRepository` (datos obtenidos desde la API).
