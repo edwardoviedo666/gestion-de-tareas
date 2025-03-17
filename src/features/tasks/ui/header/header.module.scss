@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  background-color: #ffe600;
+  padding: 1rem;
+  justify-content: center;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .text-logo {
+      text-transform: uppercase;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      height: auto;
+    }
+  }
+}
