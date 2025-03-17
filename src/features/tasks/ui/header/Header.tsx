@@ -7,7 +7,7 @@ const Header = () => {
             <p className={styles.logo}>
                 <Image src="/logo.png" width={40} height={20} alt="Logo"/>
                 <a className={styles.textLogo} href="https://www.mercadolibre.com.co">
-                    Administra Tus Tasks
+                    Task Manager
                 </a>
             </p>
         </header>
