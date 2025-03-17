@@ -13,7 +13,7 @@ interface Props {
 
 export default function BoardClient({initialTasks}: Props) {
     const {loadTasks, setTasks, moveTask} = useTaskStore();
-    const [dragged, setDragged] = useState<{ data: any; list: string } | null>(null);
+    const [dragged, setDragged] = useState<{ data: Task; list: string } | null>(null);
 
     useEffect(() => {
         if (initialTasks) {
